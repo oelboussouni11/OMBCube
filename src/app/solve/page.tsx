@@ -84,7 +84,7 @@ function NotationPopup({ onClose }: { onClose: () => void }) {
         {/* Reference image */}
         <div className="rounded-2xl overflow-hidden bg-white mb-4">
           <Image
-            src="/notation-guide.png"
+            src={`${process.env.NODE_ENV === "production" ? "/OMBCube" : ""}/notation-guide.png`}
             alt="Rubik's Cube Move Notation Guide"
             width={810}
             height={637}

@@ -743,7 +743,7 @@ export default function LearnPage() {
             {/* Notation image */}
             <div className="rounded-2xl overflow-hidden bg-white mb-8">
               <Image
-                src="/notation-guide.png"
+                src={`${process.env.NODE_ENV === "production" ? "/OMBCube" : ""}/notation-guide.png`}
                 alt="Rubik's Cube Move Notation"
                 width={810}
                 height={637}
