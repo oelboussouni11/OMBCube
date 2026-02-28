@@ -84,8 +84,8 @@ function CubeGrid() {
       "#93c5fd",
     ];
     let i = 0;
-    for (let x = -1; x <= 1; x++) {
-      for (let y = -1; y <= 1; y++) {
+    for (let x = -1; x <= 1; x++)
+      for (let y = -1; y <= 1; y++)
         for (let z = -1; z <= 1; z++) {
           if (x === 0 && y === 0 && z === 0) continue;
           items.push({
@@ -95,8 +95,6 @@ function CubeGrid() {
           });
           i++;
         }
-      }
-    }
     return items;
   }, []);
 
@@ -161,11 +159,11 @@ function FeatureCard({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <Link href={href}>
+    <Link href={href} className="flex">
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="group relative overflow-hidden rounded-3xl border border-white/[0.08] backdrop-blur-xl p-8 cursor-pointer transition-all duration-500"
+        className="group relative overflow-hidden rounded-3xl border border-white/[0.08] backdrop-blur-xl p-8 cursor-pointer transition-all duration-500 flex flex-col flex-1"
         style={{
           background: hovered
             ? "rgba(255,255,255,0.06)"
@@ -177,20 +175,18 @@ function FeatureCard({
             : "none",
         }}
       >
-        {/* Gradient glow on hover */}
         <div
           className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ${gradient}`}
           style={{ filter: "blur(40px)", transform: "scale(0.8)" }}
         />
-
-        <div className="relative z-10">
-          <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/[0.05] border border-white/[0.08]">
+        <div className="relative z-10 flex flex-col flex-1">
+          <div className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/[0.05] border border-white/[0.08]">
             {icon}
           </div>
-          <h3 className="text-2xl font-semibold text-white mb-3 tracking-tight">
+          <h3 className="text-xl font-semibold text-white mb-2 tracking-tight">
             {title}
           </h3>
-          <p className="text-white/50 text-base leading-relaxed mb-6">
+          <p className="text-white/50 text-sm leading-relaxed mb-5 flex-1">
             {description}
           </p>
           <div className="flex items-center gap-2 text-white/70 group-hover:text-white transition-colors duration-300">
@@ -219,7 +215,6 @@ function FeatureCard({
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-[#06060e] overflow-hidden">
-      {/* Background noise texture */}
       <div
         className="fixed inset-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -227,7 +222,6 @@ export default function Home() {
         }}
       />
 
-      {/* Gradient orbs */}
       <div className="fixed top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-600/10 blur-[120px] pointer-events-none" />
       <div className="fixed bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[120px] pointer-events-none" />
 
@@ -267,6 +261,12 @@ export default function Home() {
             Learn
           </Link>
           <Link
+            href="/timer"
+            className="text-white/50 hover:text-white text-sm transition-colors duration-300"
+          >
+            Timer
+          </Link>
+          <Link
             href="/solve"
             className="px-5 py-2 rounded-full bg-white/[0.06] border border-white/[0.1] text-white text-sm hover:bg-white/[0.1] transition-all duration-300"
           >
@@ -278,7 +278,6 @@ export default function Home() {
       {/* Hero */}
       <section className="relative z-10 max-w-7xl mx-auto px-8 pt-12 pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-[70vh]">
-          {/* Left: Text */}
           <div className="space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-white/60 text-xs tracking-wide">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -329,27 +328,26 @@ export default function Home() {
             </div>
 
             {/* Stats */}
-            <div className="flex items-center gap-10 pt-6 border-t border-white/[0.06]">
-              <div>
-                <div className="text-2xl font-bold text-white">≤20</div>
-                <div className="text-xs text-white/30 mt-0.5">Max moves</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-white">&lt;1s</div>
-                <div className="text-xs text-white/30 mt-0.5">Solve time</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-white">5</div>
-                <div className="text-xs text-white/30 mt-0.5">
-                  Learning levels
+            <div className="flex items-center pt-6 border-t border-white/[0.06]">
+              {[
+                { value: "≤22", label: "Max moves" },
+                { value: "<1s", label: "Solve time" },
+                { value: "78", label: "Algorithms" },
+                { value: "∞", label: "Timer solves" },
+              ].map((stat) => (
+                <div key={stat.label} className="flex-1 text-center">
+                  <div className="text-2xl font-bold text-white">
+                    {stat.value}
+                  </div>
+                  <div className="text-[10px] text-white/30 mt-0.5">
+                    {stat.label}
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Right: 3D Cube */}
           <div className="relative h-[550px] lg:h-[600px]">
-            {/* Glow behind cube */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="w-80 h-80 rounded-full bg-indigo-500/15 blur-[80px]" />
             </div>
@@ -365,12 +363,12 @@ export default function Home() {
             Choose your path
           </h2>
           <p className="text-white/40 max-w-lg mx-auto">
-            Whether you want to solve your cube instantly or master it yourself
-            — we&apos;ve got you covered.
+            Whether you want to solve your cube instantly, master it yourself,
+            or train your speed — we&apos;ve got you covered.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
           <FeatureCard
             href="/solve"
             icon={
@@ -389,7 +387,7 @@ export default function Home() {
               </svg>
             }
             title="Solve"
-            description="Scan your cube, get the optimal solution in under 20 moves, and watch it solve itself in stunning 3D."
+            description="Scan with camera or enter manually. Get the optimal solution in ≤22 moves and watch your cube solve itself in 3D."
             gradient="bg-gradient-to-br from-blue-600/20 to-cyan-600/20"
             delay="0ms"
           />
@@ -411,9 +409,31 @@ export default function Home() {
               </svg>
             }
             title="Learn"
-            description="Master the Rubik's Cube step by step with interactive 3D lessons, from complete beginner to advanced."
+            description="From beginner layer-by-layer to advanced CFOP. Interactive 3D algorithm demos with step-by-step guidance."
             gradient="bg-gradient-to-br from-violet-600/20 to-fuchsia-600/20"
             delay="100ms"
+          />
+          <FeatureCard
+            href="/timer"
+            icon={
+              <svg
+                className="w-6 h-6 text-emerald-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            }
+            title="Timer"
+            description="Speedcubing practice with scramble generator, Ao5/Ao12 stats, solve history, and +2/DNF penalties."
+            gradient="bg-gradient-to-br from-emerald-600/20 to-teal-600/20"
+            delay="200ms"
           />
         </div>
       </section>
@@ -425,7 +445,7 @@ export default function Home() {
             © 2026 OMBCube. Built by Omar El Boussouni.
           </span>
           <a
-            href="https://github.com/omarelboussouni"
+            href="https://github.com/oelboussouni11"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/20 hover:text-white/50 transition-colors text-sm"
